@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 import './App.css';
-import { client } from "./client";
+import LandingPage from './landingPage';
 
-const App=()=> {
-  const [meeting, setMeeting]=useState();
-  useEffect(()=>{
-    client.getEntries()
-    .then((response)=>{
-      console.log(response);
-      setMeeting({meeting:response.items})
-    })
-    .catch(console.error)
-  },[])
-  
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import createPoll from './createPoll';
+
+
+
+function App() {
   return (
-    <div className="App">
-  <h1>Schedule Meet</h1>
-    </div>
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path="/landingpage" exact component={LandingPage} />
+          <Route path="/" exact component={LandingPage} />
+          <Route path="/createpoll" exact component={createPoll} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
